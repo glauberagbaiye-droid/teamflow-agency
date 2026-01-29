@@ -1,0 +1,9 @@
+{
+  "name": "Copy of TeamFlow Agency",
+  "description": "Premium management suite for show agencies to handle artists, logistics, and event schedules.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
