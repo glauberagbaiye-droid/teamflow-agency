@@ -62,7 +62,7 @@ export const syncAllEventsToMobile = (events: Event[]) => {
   const icsHeader = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//TeamFlow//Agency Management//IT',
+    'PRODID:-//Nexuop//Agency Management//IT',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH'
   ];
@@ -71,7 +71,7 @@ export const syncAllEventsToMobile = (events: Event[]) => {
     const start = formatDateICS(event.date, event.startTime);
     return [
       'BEGIN:VEVENT',
-      `UID:${event.id}@teamflow.agency`,
+      `UID:${event.id}@nexuop.agency`,
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `DTSTART:${start}`,
       `DTEND:${start}`,
@@ -88,7 +88,7 @@ export const syncAllEventsToMobile = (events: Event[]) => {
   const blob = new Blob([fullICS], { type: 'text/calendar;charset=utf-8;' });
   const link = document.createElement('a');
   link.href = window.URL.createObjectURL(blob);
-  link.setAttribute('download', `TeamFlow_Full_Sync.ics`);
+  link.setAttribute('download', `Nexuop_Full_Sync.ics`);
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -108,13 +108,23 @@ export const downloadCalendarFile = (event: Event) => {
 };
 
 export const safeCopyToClipboard = async (text: string): Promise<boolean> => {
-  if (navigator.clipboard && window.isSecureContext) {
-    try {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
       return true;
-    } catch (e) {}
+    } else {
+      // Fallback per browser non sicuri o vecchi
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      const success = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return success;
+    }
+  } catch (e) {
+    return false;
   }
-  return false;
 };
 
 export const exportEventsToCSV = (events: Event[]) => {
@@ -133,6 +143,6 @@ export const exportEventsToCSV = (events: Event[]) => {
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
   link.setAttribute('href', url);
-  link.setAttribute('download', `TeamFlow_Report.csv`);
+  link.setAttribute('download', `Nexuop_Report.csv`);
   link.click();
 };

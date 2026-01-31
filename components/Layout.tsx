@@ -12,7 +12,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, role, onLogout, activeTab, setActiveTab }) => {
-  const [agencyName, setAgencyName] = useState('TeamFlow');
+  const [agencyName, setAgencyName] = useState('Nexuop');
 
   useEffect(() => {
     // Carica il nome agenzia dal profilo salvato
