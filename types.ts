@@ -1,5 +1,5 @@
 
-export type UserRole = 'ADMIN' | 'ARTIST';
+export type UserRole = 'ADMIN' | 'ARTIST' | 'SUPER_ADMIN';
 
 export enum EventStatus {
   PENDING = 'PENDING',
@@ -13,8 +13,6 @@ export interface Artist {
   name: string;
   email: string;
   role: string; // e.g., "Acrobat", "Singer", "DJ"
-  phone?: string;
-  group?: string;
 }
 
 export interface TravelLogistics {
@@ -45,7 +43,6 @@ export interface Event {
   rehearsalTime?: string;
   logistics: TravelLogistics;
   invitations: EventInvitation[];
-  revenue: number; // The amount billed to the client
   createdAt: string;
 }
 

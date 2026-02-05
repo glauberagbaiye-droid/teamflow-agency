@@ -28,28 +28,10 @@
             font-family: 'Cinzel', serif;
         }
         
-        /* Focus Ring Accessibile - Solo per tastiera */
+        /* Focus Ring Accessibile */
         :focus-visible {
             outline: 3px solid #fbbf24;
             outline-offset: 2px;
-        }
-
-        /* Skip link styling */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #b45309;
-            color: white;
-            padding: 8px;
-            z-index: 1000;
-            transition: top 0.3s;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 0 0 8px 0;
-        }
-        .skip-link:focus {
-            top: 0;
         }
 
         ::-webkit-scrollbar {
@@ -76,7 +58,11 @@
         .animate-scaleIn {
             animation: scaleIn 0.3s ease-out forwards;
         }
-        
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Screen Reader Only Utility */
         .sr-only {
             position: absolute;
             width: 1px;
@@ -96,15 +82,13 @@
     "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
     "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
     <div id="root"></div>
 <script type="module" src="/index.tsx"></script>
 </body>
